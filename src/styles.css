@@ -1,0 +1,51 @@
+:root {
+    --primary-color: #646cff; /* Основной цвет */
+    --secondary-color: #1a1a1a; /* Цвет фона */
+    --text-color: #ffffff; /* Цвет текста */
+    --background-color: #f0f0f0; /* Цвет фона для таблицы */
+    --border-radius: 8px; /* Скругление углов */
+    --transition-duration: 0.3s; /* Длительность анимации */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 2rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid var(--primary-color);
+    text-align: center;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+button {
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color var(--transition-duration), transform var(--transition-duration);
+}
+
+button:hover {
+    background-color: var(--primary-color);
+    transform: scale(1.05);
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 5px var(--primary-color);
+}

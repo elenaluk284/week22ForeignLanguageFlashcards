@@ -20,7 +20,6 @@ const WordInput = ({ newWord, setNewWord, newTranslation, setNewTranslation, add
     );
 };
 
-// Определение propTypes
 WordInput.propTypes = {
     newWord: PropTypes.string.isRequired,             // Текущий ввод слова
     setNewWord: PropTypes.func.isRequired,            // Функция для обновления слова
