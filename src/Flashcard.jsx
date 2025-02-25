@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 const Flashcard = ({ word, translation }) => {
     return (
         <div className="flashcard">
@@ -5,6 +6,10 @@ const Flashcard = ({ word, translation }) => {
             <p>{translation}</p>
         </div>
     );
+};
+Flashcard.propTypes = {
+    word: PropTypes.string.isRequired,
+    translation: PropTypes.string.isRequired,
 };
 
 export default Flashcard;

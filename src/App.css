@@ -40,3 +40,52 @@
 .read-the-docs {
   color: #888;
 }
+.flashcard {
+  border: 1px solid #646cff;
+  border-radius: 8px;
+  padding: 1em;
+  margin: 1em 0;
+  background-color: #1a1a1a;
+  color: white;
+  transition: transform 0.3s;
+}
+
+.flashcard:hover {
+  transform: scale(1.05);
+}
+.word-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Отступы между элементами */
+}
+
+.word-item {
+  padding: 10px;
+  border: 1px solid #ccc; /* Обводка */
+  border-radius: 5px; /* Закругленные углы */
+  cursor: pointer; /* Курсор при наведении */
+  transition: background-color 0.3s; /* Плавный переход при наведении */
+}
+
+.word-item:hover {
+  background-color: #f0f0f0; /* Цвет при наведении */
+}
+
+.word-input {
+  margin-bottom: 20px;
+}
+
+.word-list-container {
+  border-top: 1px solid #ccc;
+  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.word-list div {
+  cursor: pointer;
+  padding: 5px;
+}
+
+.word-list div:hover {
+  background-color: #f0f0f0;
+}
