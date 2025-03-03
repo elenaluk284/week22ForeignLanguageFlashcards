@@ -91,3 +91,30 @@
 .word-list div:hover {
   background-color: #f0f0f0;
 }
+.flashcard-carousel {
+  text-align: center;
+  margin: 1em;
+}
+
+.carousel-controls {
+  margin-top: 1em;
+}
+
+button {
+  margin: 0 1em;
+  background-color: #646cff;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #5a5a5a;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

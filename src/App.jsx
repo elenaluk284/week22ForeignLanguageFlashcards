@@ -5,6 +5,7 @@ import WordInput from './WordInput';
 import './App.css';
 import './styles.css'; // Подключаем новый файл стилей
 import Flashcard from './Flashcard';
+import FlashcardCarousel from './FlashcardCarousel'; // Импортируем новый компонент
 
 const App = () => {
     const [words, setWords] = useState([]);
@@ -115,6 +116,7 @@ const App = () => {
                     ))}
                 </tbody>
             </table>
+            <FlashcardCarousel words={words} />
             <Footer />
         </div>
     );
