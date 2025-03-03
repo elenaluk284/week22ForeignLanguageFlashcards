@@ -40,6 +40,7 @@
 .read-the-docs {
   color: #888;
 }
+
 .flashcard {
   border: 1px solid #646cff;
   border-radius: 8px;
@@ -53,6 +54,7 @@
 .flashcard:hover {
   transform: scale(1.05);
 }
+
 .word-list {
   display: flex;
   flex-direction: column;

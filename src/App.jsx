@@ -4,12 +4,14 @@ import Footer from './Footer';
 import WordInput from './WordInput';
 import './App.css';
 import './styles.css'; // Подключаем новый файл стилей
+import Flashcard from './Flashcard';
 
 const App = () => {
     const [words, setWords] = useState([]);
     const [newWord, setNewWord] = useState('');
     const [newTranslation, setNewTranslation] = useState('');
     const [isEditing, setIsEditing] = useState(null);
+    const [showFlashcards, setShowFlashcards] = useState(false);
 
     const addWord = () => {
         if (newWord && newTranslation) {
@@ -38,6 +40,10 @@ const App = () => {
         setWords(words.filter((_, i) => i !== index));
     };
 
+    const toggleFlashcards = () => {
+        setShowFlashcards(prev => !prev);
+    };
+
     return (
         <div className="App">
             <Header />
@@ -49,6 +55,16 @@ const App = () => {
                 setNewTranslation={setNewTranslation}
                 addWord={addWord}
             />
+            <button onClick={toggleFlashcards}>
+                {showFlashcards ? 'Скрыть карточки' : 'Показать карточки'}
+            </button>
+            {showFlashcards && (
+                <div className="flashcards-container">
+                    {words.map((item, index) => (
+                        <Flashcard key={index} word={item.word} translation={item.translation} />
+                    ))}
+                </div>
+            )}
             <table>
                 <thead>
                     <tr>
