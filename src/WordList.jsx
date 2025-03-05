@@ -33,7 +33,7 @@ const App = () => {
     const addWord = () => {
         if (newWord && newTranslation) {
             // Добавление нового слова в массив
-            setWords([...words, { word: newWord, translation: newTranslation }]);
+            setWords((prevWords) => [...prevWords, { word: newWord, translation: newTranslation }]);
             setNewWord(''); // Очистка поля ввода слова
             setNewTranslation(''); // Очистка поля ввода перевода
         }

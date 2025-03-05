@@ -6,11 +6,17 @@
 }
 
 .logo {
-  height: 6em;
+  height: 2em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
+
+.logo img {
+  height: 180px; 
+  width: auto;  
+}
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
@@ -117,4 +123,48 @@ button:hover {
 button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+.menu {
+  display: flex;         /* Используем flexbox для выравнивания */
+  justify-content: space-between; /* Разделяем пространство между логотипом и меню */
+  align-items: center;  /* Выравниваем по центру по вертикали */
+}
+
+.menu ul {
+  display: flex;        /* Используем flexbox для списка */
+  list-style-type: none; /* Убираем маркеры списка */
+  padding: 0;          /* Убираем отступы */
+  margin: 0;           /* Убираем внешние отступы */
+}
+
+.menu li {
+  margin: 0 15px;      /* Добавляем отступы между пунктами меню */
+}
+
+.menu li a {
+  text-align: center;   /* Центрируем текст внутри ссылок */
+  text-decoration: none; /* Убираем подчеркивание */
+  color: #000;          /* Цвет текста, можно изменить */
+}
+
+.menu li a:hover {
+  color: #646cff;       /* Цвет текста при наведении */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid var(--primary-color);
+    text-align: center;
+}
+
+th {
+    background-color: #1e1c1c; 
+    color: var(--text-color);
 }

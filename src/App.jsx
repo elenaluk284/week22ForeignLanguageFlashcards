@@ -1,11 +1,15 @@
 import { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Menu from './Menu';
+import WordListContainer from './WordListContainer';
+import TrainingMode from './TrainingMode';
 import Header from './Header';
 import Footer from './Footer';
 import WordInput from './WordInput';
-import './App.css';
-import './styles.css'; // Подключаем новый файл стилей
 import Flashcard from './Flashcard';
-import FlashcardCarousel from './FlashcardCarousel'; // Импортируем новый компонент
+import FlashcardCarousel from './FlashcardCarousel';
+import './App.css';
+import './styles.css';
 
 const App = () => {
     const [words, setWords] = useState([]);
@@ -46,7 +50,8 @@ const App = () => {
     };
 
     return (
-        <div className="App">
+        <div className="app">
+            <Menu />
             <Header />
             <h1>Изучение языков</h1>
             <WordInput
@@ -66,56 +71,62 @@ const App = () => {
                     ))}
                 </div>
             )}
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Слово</th>
-                        <th>Перевод</th>
-                        <th>Действия</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {words.map((item, index) => (
-                        <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>
-                                {isEditing === index ? (
-                                    <input
-                                        value={newWord}
-                                        onChange={(e) => setNewWord(e.target.value)}
-                                    />
-                                ) : (
-                                    item.word
-                                )}
-                            </td>
-                            <td>
-                                {isEditing === index ? (
-                                    <input
-                                        value={newTranslation}
-                                        onChange={(e) => setNewTranslation(e.target.value)}
-                                    />
-                                ) : (
-                                    item.translation
-                                )}
-                            </td>
-                            <td>
-                                {isEditing === index ? (
-                                    <>
-                                        <button onClick={saveWord}>Сохранить</button>
-                                        <button onClick={() => setIsEditing(null)}>Отмена</button>
-                                    </>
-                                ) : (
-                                    <>
-                                        <button onClick={() => editWord(index)}>Редактировать</button>
-                                        <button onClick={() => deleteWord(index)}>Удалить</button>
-                                    </>
-                                )}
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <WordListContainer words={words} />
+            <Routes>
+                <Route path="/" element={
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Слово</th>
+                                <th>Перевод</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {words.map((item, index) => (
+                                <tr key={index}>
+                                    <td>{index + 1}</td>
+                                    <td>
+                                        {isEditing === index ? (
+                                            <input
+                                                value={newWord}
+                                                onChange={(e) => setNewWord(e.target.value)}
+                                            />
+                                        ) : (
+                                            item.word
+                                        )}
+                                    </td>
+                                    <td>
+                                        {isEditing === index ? (
+                                            <input
+                                                value={newTranslation}
+                                                onChange={(e) => setNewTranslation(e.target.value)}
+                                            />
+                                        ) : (
+                                            item.translation
+                                        )}
+                                    </td>
+                                    <td>
+                                        {isEditing === index ? (
+                                            <>
+                                                <button onClick={saveWord}>Сохранить</button>
+                                                <button onClick={() => setIsEditing(null)}>Отмена</button>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <button onClick={() => editWord(index)}>Редактировать</button>
+                                                <button onClick={() => deleteWord(index)}>Удалить</button>
+                                            </>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                } />
+                <Route path="/game" element={<TrainingMode />} />
+            </Routes>
             <FlashcardCarousel words={words} />
             <Footer />
         </div>

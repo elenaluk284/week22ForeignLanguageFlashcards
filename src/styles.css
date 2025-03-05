@@ -2,7 +2,7 @@
     --primary-color: #646cff; /* Основной цвет */
     --secondary-color: #1a1a1a; /* Цвет фона */
     --text-color: #ffffff; /* Цвет текста */
-    --background-color: #f0f0f0; /* Цвет фона для таблицы */
+    --background-color: #1e1c1c; /* Цвет фона для таблицы */
     --border-radius: 8px; /* Скругление углов */
     --transition-duration: 0.3s; /* Длительность анимации */
 }
@@ -28,7 +28,7 @@ th, td {
 }
 
 th {
-    background-color: var(--primary-color);
+    background-color: #1e1c1c; 
     color: var(--text-color);
 }
 
