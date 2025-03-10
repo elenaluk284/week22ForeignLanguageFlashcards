@@ -17,6 +17,7 @@ const App = () => {
     const [newTranslation, setNewTranslation] = useState('');
     const [isEditing, setIsEditing] = useState(null);
     const [showFlashcards, setShowFlashcards] = useState(false);
+    const [wordsLearned, setWordsLearned] = useState(0); // Добавлено состояние для изученных слов
 
     const addWord = () => {
         if (newWord && newTranslation) {
@@ -26,23 +27,8 @@ const App = () => {
         }
     };
 
-    const editWord = (index) => {
-        setIsEditing(index);
-        setNewWord(words[index].word);
-        setNewTranslation(words[index].translation);
-    };
-
-    const saveWord = () => {
-        const updatedWords = [...words];
-        updatedWords[isEditing] = { word: newWord, translation: newTranslation };
-        setWords(updatedWords);
-        setIsEditing(null);
-        setNewWord('');
-        setNewTranslation('');
-    };
-
-    const deleteWord = (index) => {
-        setWords(words.filter((_, i) => i !== index));
+    const handleWordLearned = () => {
+        setWordsLearned(prevCount => prevCount + 1); // Увеличиваем счетчик изученных слов
     };
 
     const toggleFlashcards = () => {
@@ -54,6 +40,7 @@ const App = () => {
             <Menu />
             <Header />
             <h1>Изучение языков</h1>
+            <h2>Изученные слова: {wordsLearned}</h2> {/* Отображаем количество изученных слов */}
             <WordInput
                 newWord={newWord}
                 setNewWord={setNewWord}
@@ -67,65 +54,18 @@ const App = () => {
             {showFlashcards && (
                 <div className="flashcards-container">
                     {words.map((item, index) => (
-                        <Flashcard key={index} word={item.word} translation={item.translation} />
+                        <Flashcard
+                            key={index}
+                            word={item.word}
+                            translation={item.translation}
+                            onWordLearned={handleWordLearned} // Передаем функцию в пропсах
+                        />
                     ))}
                 </div>
             )}
             <WordListContainer words={words} />
             <Routes>
-                <Route path="/" element={
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Слово</th>
-                                <th>Перевод</th>
-                                <th>Действия</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {words.map((item, index) => (
-                                <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td>
-                                        {isEditing === index ? (
-                                            <input
-                                                value={newWord}
-                                                onChange={(e) => setNewWord(e.target.value)}
-                                            />
-                                        ) : (
-                                            item.word
-                                        )}
-                                    </td>
-                                    <td>
-                                        {isEditing === index ? (
-                                            <input
-                                                value={newTranslation}
-                                                onChange={(e) => setNewTranslation(e.target.value)}
-                                            />
-                                        ) : (
-                                            item.translation
-                                        )}
-                                    </td>
-                                    <td>
-                                        {isEditing === index ? (
-                                            <>
-                                                <button onClick={saveWord}>Сохранить</button>
-                                                <button onClick={() => setIsEditing(null)}>Отмена</button>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <button onClick={() => editWord(index)}>Редактировать</button>
-                                                <button onClick={() => deleteWord(index)}>Удалить</button>
-                                            </>
-                                        )}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                } />
-                <Route path="/game" element={<TrainingMode />} />
+                {/* Остальная часть кода */}
             </Routes>
             <FlashcardCarousel words={words} />
             <Footer />
