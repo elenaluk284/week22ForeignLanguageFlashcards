@@ -38,7 +38,7 @@ const Flashcard = ({ word, translation, onWordLearned }) => {
 Flashcard.propTypes = {
     word: PropTypes.string.isRequired,
     translation: PropTypes.string.isRequired,
-    onWordLearned: PropTypes.func.isRequired, // Добавлено для передачи функции
+    onWordLearned: PropTypes.func.isRequired,
 };
 
 export default Flashcard;

@@ -17,7 +17,8 @@ const App = () => {
     const [newTranslation, setNewTranslation] = useState('');
     const [isEditing, setIsEditing] = useState(null);
     const [showFlashcards, setShowFlashcards] = useState(false);
-    const [wordsLearned, setWordsLearned] = useState(0); // Добавлено состояние для изученных слов
+    const [wordsLearned, setWordsLearned] = useState(0);
+    const [emptyFields, setEmptyFields] = useState([]);
 
     const addWord = () => {
         if (newWord && newTranslation) {
@@ -28,7 +29,7 @@ const App = () => {
     };
 
     const handleWordLearned = () => {
-        setWordsLearned(prevCount => prevCount + 1); // Увеличиваем счетчик изученных слов
+        setWordsLearned(prevCount => prevCount + 1);
     };
 
     const editWord = (index) => {
@@ -38,12 +39,24 @@ const App = () => {
     };
 
     const saveWord = () => {
+        const emptyFieldsIndex = [];
+        if (!newWord) emptyFieldsIndex.push('word');
+        if (!newTranslation) emptyFieldsIndex.push('translation');
+
+        if (emptyFieldsIndex.length > 0) {
+            setEmptyFields(emptyFieldsIndex);
+            alert('Пожалуйста, заполните все поля.'); // Уведомление об ошибке
+            return;
+        }
+
         const updatedWords = [...words];
         updatedWords[isEditing] = { word: newWord, translation: newTranslation };
+        console.log('Сохраненные данные:', updatedWords[isEditing]); // Логирование данных
         setWords(updatedWords);
         setIsEditing(null);
         setNewWord('');
         setNewTranslation('');
+        setEmptyFields([]); // Сброс пустых полей
     };
 
     const deleteWord = (index) => {
@@ -59,7 +72,7 @@ const App = () => {
             <Menu />
             <Header />
             <h1>Изучение языков</h1>
-            <h2>Изученные слова: {wordsLearned}</h2> {/* Отображаем количество изученных слов */}
+            <h2>Изученные слова: {wordsLearned}</h2>
             <WordInput
                 newWord={newWord}
                 setNewWord={setNewWord}
@@ -74,8 +87,7 @@ const App = () => {
                 <div className="flashcards-container">
                     {words.map((item, index) => (
                         <Flashcard key={index} word={item.word} translation={item.translation} 
-                        onWordLearned={handleWordLearned} // Передаем функцию в пропсах
-                        />
+                        onWordLearned={handleWordLearned} />
                     ))}
                 </div>
             )}
@@ -100,6 +112,7 @@ const App = () => {
                                             <input
                                                 value={newWord}
                                                 onChange={(e) => setNewWord(e.target.value)}
+                                                style={{ border: emptyFields.includes('word') ? '1px solid red' : 'none' }}
                                             />
                                         ) : (
                                             item.word
@@ -110,35 +123,37 @@ const App = () => {
                                             <input
                                                 value={newTranslation}
                                                 onChange={(e) => setNewTranslation(e.target.value)}
-                                            />
-                                        ) : (
-                                            item.translation
-                                        )}
-                                    </td>
-                                    <td>
-                                        {isEditing === index ? (
-                                            <>
-                                                <button onClick={saveWord}>Сохранить</button>
-                                                <button onClick={() => setIsEditing(null)}>Отмена</button>
-                                            </>
-                                        ) : (
-                                            <>
-                                                <button onClick={() => editWord(index)}>Редактировать</button>
-                                                <button onClick={() => deleteWord(index)}>Удалить</button>
-                                            </>
-                                        )}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                } />
-                <Route path="/game" element={<TrainingMode />} />
-            </Routes>
-            <FlashcardCarousel words={words} />
-            <Footer />
-        </div>
-    );
-};
-
-export default App;
+                                                style={{ border: emptyFields.includes('translation') ? '1px solid red' : 'none' }}
+                                                />
+                                            ) : (
+                                                item.translation
+                                            )}
+                                        </td>
+                                        <td>
+                                            {isEditing === index ? (
+                                                <>
+                                                    <button onClick={saveWord}>Сохранить</button>
+                                                    <button onClick={() => setIsEditing(null)}>Отмена</button>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <button onClick={() => editWord(index)}>Редактировать</button>
+                                                    <button onClick={() => deleteWord(index)}>Удалить</button>
+                                                </>
+                                            )}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    } />
+                    <Route path="/game" element={<TrainingMode />} />
+                </Routes>
+                <FlashcardCarousel words={words} />
+                <Footer />
+            </div>
+        );
+    };
+    
+    export default App;
+    
