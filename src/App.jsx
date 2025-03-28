@@ -123,37 +123,37 @@ const App = () => {
                                             <input
                                                 value={newTranslation}
                                                 onChange={(e) => setNewTranslation(e.target.value)}
-                                                style={{ border: emptyFields.includes('translation') ? '1px solid red' : 'none' }}
-                                                />
-                                            ) : (
-                                                item.translation
-                                            )}
-                                        </td>
-                                        <td>
-                                            {isEditing === index ? (
-                                                <>
-                                                    <button onClick={saveWord}>Сохранить</button>
-                                                    <button onClick={() => setIsEditing(null)}>Отмена</button>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <button onClick={() => editWord(index)}>Редактировать</button>
-                                                    <button onClick={() => deleteWord(index)}>Удалить</button>
-                                                </>
-                                            )}
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    } />
-                    <Route path="/game" element={<TrainingMode />} />
-                </Routes>
-                <FlashcardCarousel words={words} />
-                <Footer />
-            </div>
-        );
-    };
-    
-    export default App;
-    
+                                                                                                style={{ border: emptyFields.includes('translation') ? '1px solid red' : 'none' }}
+                                            />
+                                        ) : (
+                                            item.translation
+                                        )}
+                                    </td>
+                                    <td>
+                                        {isEditing === index ? (
+                                            <>
+                                                <button onClick={saveWord}>Сохранить</button>
+                                                <button onClick={() => setIsEditing(null)}>Отмена</button>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <button onClick={() => editWord(index)}>Редактировать</button>
+                                                <button onClick={() => deleteWord(index)}>Удалить</button>
+                                            </>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                } />
+                <Route path="/game" element={<TrainingMode />} />
+            </Routes>
+            <FlashcardCarousel words={words} />
+            <Footer />
+        </div>
+    );
+};
+
+export default App;
+
